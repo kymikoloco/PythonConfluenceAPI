@@ -1122,6 +1122,7 @@ class ConfluenceAPI(object):
         --------------------------------------------------------------
         "storage"               |   "view","export_view","editor"
         "editor"                |   "storage"
+        "wiki"                  |   "storage"
         "view"                  |   None
         "export_view"           |   None
 
@@ -1133,7 +1134,7 @@ class ConfluenceAPI(object):
         :return: The JSON data returned from the contentbody/convert/{to} endpoint,
                  or the results of the callback. Will raise requests.HTTPError on bad input, potentially.
         """
-        assert {old_representation, new_representation} < {"storage", "editor", "view", "export_view"}
+        assert {old_representation, new_representation} < {"storage", "editor", "view", "export_view", "wiki"}
         # TODO: Enforce conversion rules better here.
         request_data = {"value": str(content_data), "representation": old_representation}
         return self._service_post_request("rest/api/contentbody/convert/{to}".format(to=new_representation),
